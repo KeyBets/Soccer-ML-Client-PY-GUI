@@ -110,7 +110,9 @@ class SoccerPredictionClient(QWidget):
                 output = f"Prediction for {home_team} vs {away_team}:\n\n"
                 output += f"Full Time Result: {result['Result']} (Home: {result['FTHG']:.2f} - Away: {result['FTAG']:.2f})\n"
                 output += f"Half Time Result: {result['HTResult']} (Home: {result['HTHG']:.2f} - Away: {result['HTAG']:.2f})\n\n"
-                
+                output += f"Probable Full Time Goals: Home: {round(result['FTHG'])} - Away: {round(result['FTAG'])}\n"
+                output += f"Probable Half Time Goals: Home: {round(result['HTHG'])} - Away: {round(result['HTAG'])}\n\n"
+
                 output += "Other Statistics:\n"
                 output += f"Corners: Home {result['HC']:.2f} - Away {result['AC']:.2f}\n"
                 output += f"Fouls: Home {result['HF']:.2f} - Away {result['AF']:.2f}\n"
