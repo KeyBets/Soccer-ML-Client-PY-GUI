@@ -53,13 +53,13 @@ python soccer_prediction.py
 
 If you're unfamiliar with Python or just want a quick setup, you can download the pre-built executable file from the [releases](https://github.com/KeyBets/Soccer-ML-Client-PY-GUI/releases) page.
 
-#### Step 1: Download the EXE
+#### Step 1: Download the ZIP
 
-- Go to the [releases](https://github.com/KeyBets/Soccer-ML-Client-PY-GUI/releases) page and download the latest `.exe` file.
+- Go to the [releases](https://github.com/KeyBets/Soccer-ML-Client-PY-GUI/releases) page, download the latest `.zip` file and extract.
 
 #### Step 2: Run the EXE
 
-- After downloading, double-click the EXE file to run the app on your Windows machine.
+- After extracting, double-click the EXE file to run the app on your Windows machine.
 
 No installation of Python or other dependencies is required.
 
