@@ -92,46 +92,45 @@ class SoccerPredictionClient(QWidget):
             self.away_team_combo.addItems(teams)
 
     def predict_match(self):
-        home_team = self.home_team_combo.currentText()
-        away_team = self.away_team_combo.currentText()
-
-        if home_team == away_team:
-            self.results_display.setText("Error: Home team and Away team must be different.")
-            return
-
         try:
-            response = requests.post('http://34.83.220.67:5000/predict', 
-                                    json={'home_team': home_team, 'away_team': away_team})
+            home_team = self.home_team_combo.currentText()
+            away_team = self.away_team_combo.currentText()
+            
+            # Prepare the data to be sent to the server
+            feature_data = {
+                'home_team': home_team,
+                'away_team': away_team
+            }
+            
+            # Send POST request to the server
+            response = requests.post('http://34.83.220.67:5000/predict', json=feature_data)
             
             if response.status_code == 200:
                 result = response.json()
                 
-                # Format the output
+                # Format the translated output
                 output = f"Prediction for {home_team} vs {away_team}:\n\n"
-                output += f"Full Time Result: {result['Result']} (Home: {result['FTHG']:.2f} - Away: {result['FTAG']:.2f})\n"
-                output += f"Half Time Result: {result['HTResult']} (Home: {result['HTHG']:.2f} - Away: {result['HTAG']:.2f})\n\n"
-                output += f"Probable Full Time Goals: Home: {round(result['FTHG'])} - Away: {round(result['FTAG'])}\n"
-                output += f"Probable Half Time Goals: Home: {round(result['HTHG'])} - Away: {round(result['HTAG'])}\n\n"
-
-                output += "Other Statistics:\n"
-                output += f"Corners: Home {result['HC']:.2f} - Away {result['AC']:.2f}\n"
-                output += f"Fouls: Home {result['HF']:.2f} - Away {result['AF']:.2f}\n"
-                output += f"Yellow Cards: Home {result['HY']:.2f} - Away {result['AY']:.2f}\n"
-                output += f"Red Cards: Home {result['HR']:.2f} - Away {result['AR']:.2f}\n"
+                output += f"Full Time Goals: Home: {result['FTHG']:.2f} - Away: {result['FTAG']:.2f}\n"
+                output += f"Half Time Goals: Home: {result['HTHG']:.2f} - Away: {result['HTAG']:.2f}\n"
+                output += f"Corners: Home: {result['HC']:.2f} - Away: {result['AC']:.2f}\n"
+                output += f"Red Cards: Home: {result['HR']:.2f} - Away: {result['AR']:.2f}\n"
+                output += f"Winner (1 home, 0 draw, -1 away): {result['Winner_numeric']:.2f}\n"
+                output += f"Half Time Winner: {result['HTWinner_numeric']:.2f}\n\n"
                 
-                output += "\nFull Prediction Data:\n"
+                # Format the raw data neatly
+                raw_output = "Raw Data:\n"
                 for key, value in result.items():
-                    if isinstance(value, float):
-                        output += f"{key}: {value:.4f}\n"
-                    else:
-                        output += f"{key}: {value}\n"
-                
-                self.results_display.setText(output)
+                    raw_output += f"{key}: {value:.2f}\n"
+                    
+                # Set the combined output to the text display
+                self.results_display.setText(output + raw_output)
             else:
                 self.results_display.setText(f"Error: Received status code {response.status_code} from server.")
         
         except requests.exceptions.RequestException as e:
             self.results_display.setText(f"Error connecting to server: {str(e)}")
+
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
