@@ -19,7 +19,7 @@ Make sure Python 3.x is installed on your system. You will also need to install 
 
 ```bash
 git clone https://github.com/your-username/soccer-prediction-client.git
-cd soccer-prediction-client
+cd Soccer-ML-Client-PY-GUI
 ```
 
 #### Step 2: Install the Required Dependencies
