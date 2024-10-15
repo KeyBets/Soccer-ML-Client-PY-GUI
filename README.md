@@ -2,7 +2,7 @@
 
 A user-friendly soccer prediction desktop application built using Python and PyQt5. The app fetches soccer team data and predictions via an API and provides results for match outcomes, including goals, corners, and more. 
 
-**NOTE:** go to r/keybet subreddit and dm the api key or device ID generated and stored in credentials.csv to the mods/ modmail.
+**NOTE:** go to r/keybet subreddit and dm the api key or device ID generated and stored in credentials.csv to the mods/ modmail. YOU LITERALLY JUST OPEN REDDIT AND SEARCH THAT SUB!
 
 ## Features
 
